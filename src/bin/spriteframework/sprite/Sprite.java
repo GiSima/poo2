@@ -16,12 +16,10 @@ public class Sprite {
     protected int dx;
 
     public Sprite() {
-
         visible = true;
     }
 
     public void die() {
-
         visible = false;
     }
 
@@ -66,17 +64,14 @@ public class Sprite {
     }
 
     public int getImageWidth() {
-
         return imageWidth;
     }
 
     public int getImageHeight() {
-
         return imageHeight;
     }
-    
-    public Rectangle getRect() {
 
+    public Rectangle getRect() {
         return new Rectangle(x, y,
                 image.getWidth(null), image.getHeight(null));
     }
@@ -87,22 +82,18 @@ public class Sprite {
         imageHeight = image.getHeight(null);
     }
     public void setDying(boolean dying) {
-
         this.dying = dying;
     }
 
     public boolean isDying() {
-
         return this.dying;
     }
-    
-    public void moveX(int direction) {
 
+    public void moveX(int direction) {
         this.x += direction;
     }
-    
-    public void moveY(int direction) {
 
+    public void moveY(int direction) {
         this.y += direction;
     }
 }
