@@ -25,13 +25,13 @@ import java.util.LinkedList;
 public abstract class AbstractBoard extends JPanel {
 
     protected Dimension d;
-    
+
     //define sprites
 //    private List<Alien> aliens;
     protected LinkedList<Player> players;
-    
+
     protected LinkedList<BadSprite> badSprites;
-    
+
 //    private Shot shot;
 //    
     // define global control vars   
@@ -40,7 +40,7 @@ public abstract class AbstractBoard extends JPanel {
 
     private int numberPlayers;  // to do - future use
     protected boolean inGame = true;
-//    private String explImg = "src/images/explosion.png";
+    //    private String explImg = "src/images/explosion.png";
     protected String message = "Game Over";
 
     protected Timer timer;
@@ -59,47 +59,47 @@ public abstract class AbstractBoard extends JPanel {
 
         initBoard();
         createPlayers();
-		        numberPlayers = 1;
-		        badSprites = new LinkedList<BadSprite>();
-		        createBadSprites();
-		        createOtherSprites();
-		//        shot = new Shot();
+        numberPlayers = 1;
+        badSprites = new LinkedList<BadSprite>();
+        createBadSprites();
+        createOtherSprites();
+        //        shot = new Shot();
     }
 
     private void initBoard() {
 
-    	addKeyListener(new TAdapter());
-    	setFocusable(true);
-    	d = new Dimension(Commons.BOARD_WIDTH, Commons.BOARD_HEIGHT);
-    	setBackground(Color.black);
+        addKeyListener(new TAdapter());
+        setFocusable(true);
+        d = new Dimension(Commons.BOARD_WIDTH, Commons.BOARD_HEIGHT);
+        setBackground(Color.black);
 
-    	timer = new Timer(Commons.DELAY, new GameCycle());
-    	timer.start();
+        timer = new Timer(Commons.DELAY, new GameCycle());
+        timer.start();
 
-    	createPlayers();
-    	numberPlayers = 1;
-    	badSprites = new LinkedList<BadSprite>();
-    	createBadSprites();
-    	createOtherSprites();
-		//        shot = new Shot();
+        createPlayers();
+        numberPlayers = 1;
+        badSprites = new LinkedList<BadSprite>();
+        createBadSprites();
+        createOtherSprites();
+        //        shot = new Shot();
     }
 
 
     protected void createPlayers() {
-		players = new LinkedList<Player>();
+        players = new LinkedList<Player>();
         players.add(createPlayer());
-	}
-	
-	protected Player createPlayer() {
-		return new Player();
-	}
+    }
 
-   public Player getPlayer(int i) {
-	   if (i >=0 && i<players.size())
-		   return players.get(i);
-	   return null;
-   }
-   
+    protected Player createPlayer() {
+        return new Player();
+    }
+
+    public Player getPlayer(int i) {
+        if (i >=0 && i<players.size())
+            return players.get(i);
+        return null;
+    }
+
     private void drawBadSprites(Graphics g) {
 
         for (BadSprite bad : badSprites) {
@@ -114,27 +114,27 @@ public abstract class AbstractBoard extends JPanel {
                 bad.die();
             }
             if (bad.getBadnesses()!= null) {
-            	for (BadSprite badness: bad.getBadnesses()) {
-            		if (!badness.isDestroyed()) {
-            			g.drawImage(badness.getImage(), badness.getX(), badness.getY(), this);
-            		}
-            	}
+                for (BadSprite badness: bad.getBadnesses()) {
+                    if (!badness.isDestroyed()) {
+                        g.drawImage(badness.getImage(), badness.getX(), badness.getY(), this);
+                    }
+                }
             }
         }
     }
 
     private void drawPlayers(Graphics g) {
-    	for (Player player: players) {
-    		if (player.isVisible()) {
-    			g.drawImage(player.getImage(), player.getX(), player.getY(), this);
-    		}
+        for (Player player: players) {
+            if (player.isVisible()) {
+                g.drawImage(player.getImage(), player.getX(), player.getY(), this);
+            }
 
-    		if (player.isDying()) {
+            if (player.isDying()) {
 
-    			player.die();
-    			inGame = false;
-    		}
-    	}
+                player.die();
+                inGame = false;
+            }
+        }
     }
 
 
@@ -208,7 +208,7 @@ public abstract class AbstractBoard extends JPanel {
 
 
 
-	private class GameCycle implements ActionListener {
+    private class GameCycle implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -222,16 +222,16 @@ public abstract class AbstractBoard extends JPanel {
         @Override
         public void keyReleased(KeyEvent e) {
             for (Player player: players)
-                 player.keyReleased(e);
+                player.keyReleased(e);
         }
 
         @Override
         public void keyPressed(KeyEvent e) {
-        	for (Player player: players) {
+            for (Player player: players) {
                 player.keyPressed(e);
 
                 processOtherSprites(player, e); // hotspot
-        	}
+            }
         }
     }
 }
