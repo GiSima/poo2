@@ -11,15 +11,17 @@ import javax.swing.ImageIcon;
 import bin.spriteframework.AbstractBoard;
 import bin.spriteframework.sprite.BadSprite;
 import bin.spriteframework.sprite.Player;
+import bin.spriteframework.sprite.Shot;
+import bin.spriteframework.sprite.BomberSprite;
+import bin.spriteframework.sprite.Bomb;
 
-import bin.spaceinvaders.sprite.*;
 
-public class SpaceInvadersBoard extends AbstractBoard{  
+public class SpaceInvadersBoard extends AbstractBoard{
     //define sprites
     //private List<BadSprite> aliens;
-    private Shot shot;    
-    
-    // define global control vars   
+    private Shot shot;
+
+    // define global control vars
     private int direction = -1;
     private int deaths = 0;
 
@@ -34,7 +36,7 @@ public class SpaceInvadersBoard extends AbstractBoard{
             }
         }
     }
-    
+
     protected void createOtherSprites() {
         shot = new Shot();
     }
@@ -47,26 +49,26 @@ public class SpaceInvadersBoard extends AbstractBoard{
 
     // Override
     protected void drawOtherSprites(Graphics g) {
-            drawShot(g);
+        drawShot(g);
     }
-    
+
     protected void processOtherSprites(Player player, KeyEvent e) {
-		int x = player.getX();
-		int y = player.getY();
+        int x = player.getX();
+        int y = player.getY();
 
-		int key = e.getKeyCode();
+        int key = e.getKeyCode();
 
-		if (key == KeyEvent.VK_SPACE) {
+        if (key == KeyEvent.VK_SPACE) {
 
-			if (inGame) {
+            if (inGame) {
 
-				if (!shot.isVisible()) {
+                if (!shot.isVisible()) {
 
-					shot = new Shot(x, y);
-				}
-			}
-		}
-	}
+                    shot = new Shot(x, y);
+                }
+            }
+        }
+    }
 
 //    private void gameOver(Graphics g) {
 //
@@ -95,8 +97,8 @@ public class SpaceInvadersBoard extends AbstractBoard{
         }
 
         // player
-        for (Player player: players) 
-        	player.act();
+        for (Player player: players)
+            player.act();
 
         // shot
         if (shot.isVisible()) {
@@ -180,12 +182,12 @@ public class SpaceInvadersBoard extends AbstractBoard{
         }
 
         // bombs
-        
+
         updateOtherSprites();
     }
 
     protected void updateOtherSprites() {
-		Random generator = new Random();
+        Random generator = new Random();
 
         for (BadSprite alien : badSprites) {
             int shot = generator.nextInt(15);
@@ -223,6 +225,5 @@ public class SpaceInvadersBoard extends AbstractBoard{
                 }
             }
         }
-	}    
+    }
 }
-
