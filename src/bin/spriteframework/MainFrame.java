@@ -1,31 +1,23 @@
+
+
 package bin.spriteframework;
 
-import javax.swing.JFrame;
+import bin.spriteframework.sprite.SpriteFactory;
 
-public abstract class MainFrame extends JFrame  {
+import javax.swing.*;
 
-	// hotspot
-	protected abstract AbstractBoard createBoard();
+import static bin.FreezeMonsters.CommonsFreezeMonsters.*;
 
-	public MainFrame(String t) {
-		add(createBoard());
+public abstract class MainFrame extends JFrame {
+    protected abstract AbstractBoard createBoard(SpriteFactory spriteFactory);
 
-		setTitle(t);
-		setSize(Commons.BOARD_WIDTH, Commons.BOARD_HEIGHT);
-
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setResizable(false);
-		setLocationRelativeTo(null);
-		setVisible(true);
-	}
-
-
-//    public static void main(String[] args) {
-//
-//        EventQueue.invokeLater(() -> {
-//
-//            MainFrameExtended ex = new MainFrameExtended();
-//        });
-//    }
-
+    public MainFrame(String t, SpriteFactory spriteFactory) {
+        this.add(this.createBoard(spriteFactory));
+        this.setTitle(t);
+        this.setSize(BOARD_WIDTH, BOARD_HEIGHT);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+    }
 }

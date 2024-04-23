@@ -1,120 +1,71 @@
 package bin.spriteframework;
 
-
-import javax.swing.JPanel;
-import javax.swing.Timer;
-
 import bin.spriteframework.sprite.BadSprite;
 import bin.spriteframework.sprite.Player;
+import bin.spriteframework.sprite.SpriteFactory;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.Toolkit;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
+
+import static bin.FreezeMonsters.CommonsFreezeMonsters.*;
 
 
 public abstract class AbstractBoard extends JPanel {
-
     protected Dimension d;
-
-    //define sprites
-//    private List<Alien> aliens;
-    protected LinkedList<Player> players;
-
-    protected LinkedList<BadSprite> badSprites;
-
-//    private Shot shot;
-//    
-    // define global control vars   
-//    private int direction = -1;
-//    private int deaths = 0;
-
-    private int numberPlayers;  // to do - future use
+    protected List<Player> players;
+    protected ArrayList<BadSprite> badSprites;
     protected boolean inGame = true;
-    //    private String explImg = "src/images/explosion.png";
     protected String message = "Game Over";
-
     protected Timer timer;
+    protected SpriteFactory spriteFactory;
 
-    // Frozen Spots
-    //  void initBoard()
-    // 
-    // HotSpots
-    protected abstract void createBadSprites();
-    protected abstract void createOtherSprites();
-    protected abstract void drawOtherSprites(Graphics g);
-    protected abstract void update();
-    protected abstract void processOtherSprites(Player player, KeyEvent e);
-
-    public AbstractBoard() {
-
-        initBoard();
-        createPlayers();
-        numberPlayers = 1;
-        badSprites = new LinkedList<BadSprite>();
-        createBadSprites();
-        createOtherSprites();
-        //        shot = new Shot();
+    public AbstractBoard(SpriteFactory spriteFactory) {
+        this.spriteFactory = spriteFactory; // Factory
+        this.setSize(BOARD_WIDTH, BOARD_HEIGHT);
+        this.initBoard();
+        this.createPlayers();
+        this.badSprites = new ArrayList<>();
+        this.createBadSprites();
+        this.createOtherSprites();
     }
 
     private void initBoard() {
-
-        addKeyListener(new TAdapter());
-        setFocusable(true);
-        d = new Dimension(Commons.BOARD_WIDTH, Commons.BOARD_HEIGHT);
-        setBackground(Color.black);
-
-        timer = new Timer(Commons.DELAY, new GameCycle());
-        timer.start();
-
-        createPlayers();
-        numberPlayers = 1;
-        badSprites = new LinkedList<BadSprite>();
-        createBadSprites();
-        createOtherSprites();
-        //        shot = new Shot();
+        this.addKeyListener(new TAdapter());
+        this.setFocusable(true);
+        this.d = new Dimension(BOARD_WIDTH, BOARD_HEIGHT);
+        this.setBackground(Color.green);
+        this.timer = new Timer(DELAY, new GameCycle());
+        this.timer.start();
+        this.createPlayers();
+        this.badSprites = new ArrayList<>();
+        this.createBadSprites();
+        this.createOtherSprites();
     }
-
 
     protected void createPlayers() {
-        players = new LinkedList<Player>();
-        players.add(createPlayer());
-    }
-
-    protected Player createPlayer() {
-        return new Player();
-    }
-
-    public Player getPlayer(int i) {
-        if (i >=0 && i<players.size())
-            return players.get(i);
-        return null;
+        this.players = new ArrayList<>();
+        this.players.add(this.spriteFactory.createPlayer()); // Factory Players
     }
 
     private void drawBadSprites(Graphics g) {
-
-        for (BadSprite bad : badSprites) {
-
+        for (BadSprite bad : this.badSprites) {
             if (bad.isVisible()) {
-
                 g.drawImage(bad.getImage(), bad.getX(), bad.getY(), this);
             }
 
             if (bad.isDying()) {
-
                 bad.die();
             }
-            if (bad.getBadnesses()!= null) {
-                for (BadSprite badness: bad.getBadnesses()) {
+
+            List<BadSprite> badnesses = bad.getBadnesses();
+            if (badnesses != null) {
+                for (BadSprite badness : badnesses) {
                     if (!badness.isDestroyed()) {
                         g.drawImage(badness.getImage(), badness.getX(), badness.getY(), this);
                     }
@@ -124,113 +75,90 @@ public abstract class AbstractBoard extends JPanel {
     }
 
     private void drawPlayers(Graphics g) {
-        for (Player player: players) {
+        for (Player player : this.players) {
             if (player.isVisible()) {
                 g.drawImage(player.getImage(), player.getX(), player.getY(), this);
             }
 
             if (player.isDying()) {
-
                 player.die();
-                inGame = false;
+                this.inGame = false;
             }
         }
     }
 
-
-
-
-
-    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        doDrawing(g);
+        this.doDrawing(g);
     }
 
-    private void doDrawing(Graphics g1) { // Template Method
+    public void doDrawing(Graphics g1) {
         Graphics2D g = (Graphics2D) g1;
-        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
-
-        g.setRenderingHint(RenderingHints.KEY_RENDERING,
-                RenderingHints.VALUE_RENDER_QUALITY);
-        g.setColor(Color.black);
-        g.fillRect(0, 0, d.width, d.height);
-        g.setColor(Color.green);
-
-        if (inGame) {
-
-            g.drawLine(0, Commons.GROUND,
-                    Commons.BOARD_WIDTH, Commons.GROUND);
-
-            drawBadSprites(g);
-            drawPlayers(g);
-            drawOtherSprites(g);
-
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        //g.setColor(Color.decode("#66FF99"));  //cor do freezemonster
+        g.fillRect(0, 0, this.d.width, this.d.height);
+        if (this.inGame) {
+            this.drawBadSprites(g);
+            this.drawPlayers(g);
+            this.drawOtherSprites(g);
         } else {
-
-            if (timer.isRunning()) {
-                timer.stop();
+            if (this.timer.isRunning()) {
+                this.timer.stop();
             }
 
-            gameOver(g);
+            this.gameOver(g);
         }
 
         Toolkit.getDefaultToolkit().sync();
     }
 
     private void gameOver(Graphics g) {
-
-        g.setColor(Color.black);
-        g.fillRect(0, 0, Commons.BOARD_WIDTH, Commons.BOARD_HEIGHT);
-
         g.setColor(new Color(0, 32, 48));
-        g.fillRect(50, Commons.BOARD_WIDTH / 2 - 30, Commons.BOARD_WIDTH - 100, 50);
+        g.fillRect(BORDER_LEFT, BOARD_HEIGHT / 2 - 50, BOARD_WIDTH, 50);
         g.setColor(Color.white);
-        g.drawRect(50, Commons.BOARD_WIDTH / 2 - 30, Commons.BOARD_WIDTH - 100, 50);
-
+        g.drawRect(BORDER_LEFT, BOARD_HEIGHT / 2 - 50, BOARD_WIDTH, 50);
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics fontMetrics = this.getFontMetrics(small);
-
         g.setColor(Color.white);
         g.setFont(small);
-        g.drawString(message, (Commons.BOARD_WIDTH - fontMetrics.stringWidth(message)) / 2,
-                Commons.BOARD_WIDTH / 2);
+        g.drawString(this.message, (BOARD_WIDTH - fontMetrics.stringWidth(this.message)) / 2, BOARD_HEIGHT / 2 - 25);
     }
 
+    protected void createBadSprites() {
+        // Implementação nas subclasses
+    }
 
+    protected abstract void createOtherSprites();
+
+    protected abstract void drawOtherSprites(Graphics var1);
+
+    protected abstract void update();
+
+    protected abstract void processOtherSprites(Player var1, KeyEvent var2);
 
     private void doGameCycle() {
-
-        update();
-        repaint();
+        this.update();
+        this.repaint();
     }
 
-
-
     private class GameCycle implements ActionListener {
-
-        @Override
         public void actionPerformed(ActionEvent e) {
-
-            doGameCycle();
+            AbstractBoard.this.doGameCycle();
         }
     }
 
     private class TAdapter extends KeyAdapter {
-
-        @Override
         public void keyReleased(KeyEvent e) {
-            for (Player player: players)
+            for (Player player : players) {
                 player.keyReleased(e);
+            }
         }
 
-        @Override
         public void keyPressed(KeyEvent e) {
-            for (Player player: players) {
+            for (Player player : players) {
                 player.keyPressed(e);
-
-                processOtherSprites(player, e); // hotspot
+                processOtherSprites(player, e);
             }
         }
     }
