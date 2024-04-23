@@ -1,23 +1,26 @@
 package bin.spriteframework.sprite;
 
-import javax.swing.ImageIcon;
+import bin.ImageResizer;
 
-import bin.spriteframework.sprite.BadSprite;
+import javax.swing.ImageIcon;
 
 
 public class Shot extends BadSprite {
     public Shot() {
+        setVisible(false);
     }
 
-    public Shot(int x, int y) {
-        initShot(x, y);
+    public Shot(String path, int x, int y, int width, int height) {
+        this.path = path;
+        this.width = width;
+        this.height = height;
+        initializeRay(x, y);
     }
 
-    private void initShot(int x, int y) {
-        String shotImg = "../images/shot.png";
-        ImageIcon ii = new ImageIcon(shotImg);
-        setImage(ii.getImage());
-
+    private void initializeRay(int x, int y) {
+        ImageIcon resizedIcon = ImageResizer.resizeImage(path, width, height);
+        setImage(resizedIcon.getImage());
+        setVisible(true);
         int H_SPACE = 6;
         setX(x + H_SPACE);
 

@@ -1,37 +1,34 @@
 package bin.spriteframework.sprite;
 
-import javax.swing.ImageIcon;
+import bin.ImageResizer;
 
-import bin.spriteframework.sprite.BadSprite;
+import javax.swing.*;
 
 public class Bomb extends BadSprite {
-
     private boolean destroyed;
 
-    public Bomb(int x, int y) {
-        initBomb(x, y);
+    public Bomb(String path, int x, int y, int width, int height) {
+        this.path = path;
+        this.width = width;
+        this.height = height;
+        initializeBomb(x, y);
     }
 
-    private void initBomb(int x, int y) {
+    private void initializeBomb(int x, int y) {
         setDestroyed(true);
 
         this.x = x;
         this.y = y;
 
-        String bombImg = "../images/bomb.png";
-        ImageIcon ii = new ImageIcon(bombImg);
-        setImage(ii.getImage());
+        ImageIcon resizedIcon = ImageResizer.resizeImage(path,  width, height);
+        setImage(resizedIcon.getImage());
     }
 
-    public void setDestroyed(boolean destroyed) {
-
-        this.destroyed = destroyed;
+    public void setDestroyed(boolean isDestroyed) {
+        destroyed = isDestroyed;
     }
 
     public boolean isDestroyed() {
-
         return destroyed;
     }
-
-
 }
