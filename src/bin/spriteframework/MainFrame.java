@@ -6,7 +6,8 @@ import bin.spriteframework.sprite.SpriteFactory;
 
 import javax.swing.*;
 
-import static bin.FreezeMonsters.CommonsFreezeMonsters.*;
+import static bin.spriteframework.Commons.*;
+
 
 public abstract class MainFrame extends JFrame {
     protected abstract AbstractBoard createBoard(SpriteFactory spriteFactory);

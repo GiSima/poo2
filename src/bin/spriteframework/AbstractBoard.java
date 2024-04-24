@@ -6,14 +6,11 @@ import bin.spriteframework.sprite.SpriteFactory;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import static bin.FreezeMonsters.CommonsFreezeMonsters.*;
+import static bin.spriteframework.Commons.*;
 
 
 public abstract class AbstractBoard extends JPanel {
@@ -36,11 +33,11 @@ public abstract class AbstractBoard extends JPanel {
     }
 
     private void initBoard() {
-        this.addKeyListener(new TAdapter());
+        this.addKeyListener(new TAdapter(this));
         this.setFocusable(true);
         this.d = new Dimension(BOARD_WIDTH, BOARD_HEIGHT);
         this.setBackground(Color.green);
-        this.timer = new Timer(DELAY, new GameCycle());
+        this.timer = new Timer(DELAY, new GameCycle(this));
         this.timer.start();
         this.createPlayers();
         this.badSprites = new ArrayList<>();
@@ -125,9 +122,7 @@ public abstract class AbstractBoard extends JPanel {
         g.drawString(this.message, (BOARD_WIDTH - fontMetrics.stringWidth(this.message)) / 2, BOARD_HEIGHT / 2 - 25);
     }
 
-    protected void createBadSprites() {
-        // Implementação nas subclasses
-    }
+    protected void createBadSprites() {} //implementado nas subclasses
 
     protected abstract void createOtherSprites();
 
@@ -137,29 +132,10 @@ public abstract class AbstractBoard extends JPanel {
 
     protected abstract void processOtherSprites(Player var1, KeyEvent var2);
 
-    private void doGameCycle() {
+    public void doGameCycle() {
         this.update();
         this.repaint();
     }
 
-    private class GameCycle implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            AbstractBoard.this.doGameCycle();
-        }
-    }
 
-    private class TAdapter extends KeyAdapter {
-        public void keyReleased(KeyEvent e) {
-            for (Player player : players) {
-                player.keyReleased(e);
-            }
-        }
-
-        public void keyPressed(KeyEvent e) {
-            for (Player player : players) {
-                player.keyPressed(e);
-                processOtherSprites(player, e);
-            }
-        }
-    }
 }
