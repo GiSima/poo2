@@ -1,7 +1,7 @@
 package bin.spriteframework.sprite;
 
 import java.awt.Image;
-import java.awt.Rectangle;
+
 public class Sprite{
     private boolean visible = true;
     protected Image image;
@@ -55,32 +55,13 @@ public class Sprite{
         return this.x;
     }
 
-    public int[] getDirection() {
-        return direction;
-    }
+    public int[] getDirection() { return direction; }
 
     public void setDirection(int x, int y) {
         this.direction[0] = x;
         this.direction[1] = y;
     }
 
-    public void setDirectionX() {
-        if (this.direction[0] == 0) {
-            this.direction[0] = -1;
-        }
-        this.direction[0] = this.direction[0] * -1;
-    }
-
-    public void setDirectionY() {
-        if (this.direction[1] == 0) {
-            this.direction[1] = 1;
-        }
-        this.direction[1] = this.direction[1] * -1;
-    }
-
-    public Rectangle getRect() {
-        return new Rectangle(this.x, this.y, this.image.getWidth(null), this.image.getHeight(null));
-    }
 
     public void setDying(boolean dying) {
         this.dying = dying;
@@ -90,10 +71,7 @@ public class Sprite{
         return this.dying;
     }
 
-    public void move(int speed) {
-        this.x += this.direction[0] * speed;
-        this.y += this.direction[1] * speed;
-    }
+
     public void moveX(int direction){
         this.x += direction;
     }

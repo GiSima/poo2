@@ -2,10 +2,12 @@ package bin.spriteframework.sprite;
 
 import bin.ImageResizer;
 
+
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 
-import static bin.FreezeMonsters.CommonsFreezeMonsters.*;
+import static bin.spriteframework.Commons.*;
+
 
 public class Player extends Sprite {
     private int width;
