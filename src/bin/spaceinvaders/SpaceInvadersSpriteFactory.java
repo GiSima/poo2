@@ -20,10 +20,5 @@ public class SpaceInvadersSpriteFactory implements SpriteFactory {
         return new Shot(IMAGE_SHOT,x, y, SHOT_WIDTH, SHOT_HEIGHT);
     }
 
-    @Override
-    public Shot createRay(){
-        return new Shot();
-    }
-
 
 }
