@@ -15,7 +15,9 @@ public class SpaceInvadersSpriteFactory implements SpriteFactory {
 
     @Override
     public BomberSprite createBadSprite(int x, int y) {
-        return new Alien(x, y, ALIEN_WIDTH, ALIEN_HEIGHT);
+        Alien alien = new Alien(x, y, ALIEN_WIDTH, ALIEN_HEIGHT);
+        alien.setDirection(1,0);
+        return alien;
     }
 
     @Override

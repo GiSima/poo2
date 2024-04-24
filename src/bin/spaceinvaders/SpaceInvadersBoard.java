@@ -18,7 +18,6 @@ public class SpaceInvadersBoard extends AbstractBoard {
     private Shot shot;
     private int direction = -1;
     private int deaths = 0;
-    private String explImg = IMAGE_EXPLOSION;
 
     public SpaceInvadersBoard(SpriteFactory spriteFactory) {
         super(spriteFactory);
@@ -101,7 +100,7 @@ public class SpaceInvadersBoard extends AbstractBoard {
         int shotY = shot.getY();
         for (BadSprite alien : badSprites) {
             if (alien.isVisible() && shot.isVisible() && shotHitsAlien(shotX, shotY, alien)) {
-                ImageIcon ii = new ImageIcon(explImg);
+                ImageIcon ii = new ImageIcon(IMAGE_EXPLOSION);
                 alien.setImage(ii.getImage());
                 alien.setDying(true);
                 deaths++;
@@ -119,7 +118,7 @@ public class SpaceInvadersBoard extends AbstractBoard {
     private void updateAliens() {
         for (BadSprite alien : badSprites) {
             if (alien.isVisible()) {
-                alien.moveX(direction);
+                alien.moveX(direction * ALIEN_MOVEMENT);
                 checkAlienBounds(alien);
             }
         }
@@ -170,7 +169,7 @@ public class SpaceInvadersBoard extends AbstractBoard {
     private void checkBombCollisions(Bomb bomb) {
         for (Player player : players) {
             if (player.isVisible() && !bomb.isDestroyed() && bombHitsPlayer(bomb, player)) {
-                ImageIcon ii = new ImageIcon(explImg);
+                ImageIcon ii = new ImageIcon(IMAGE_EXPLOSION);
                 player.setImage(ii.getImage());
                 player.setDying(true);
                 bomb.setDestroyed(true);
