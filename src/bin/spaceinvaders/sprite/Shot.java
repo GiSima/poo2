@@ -1,6 +1,7 @@
-package bin.spriteframework.sprite;
+package bin.spaceinvaders.sprite;
 
 import bin.ImageResizer;
+import bin.spriteframework.sprite.BadSprite;
 
 import javax.swing.ImageIcon;
 

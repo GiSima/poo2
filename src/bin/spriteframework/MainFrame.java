@@ -1,5 +1,3 @@
-
-
 package bin.spriteframework;
 
 import bin.spriteframework.sprite.SpriteFactory;
@@ -7,7 +5,6 @@ import bin.spriteframework.sprite.SpriteFactory;
 import javax.swing.*;
 
 import static bin.spriteframework.Commons.*;
-
 
 public abstract class MainFrame extends JFrame {
     protected abstract AbstractBoard createBoard(SpriteFactory spriteFactory);

@@ -15,13 +15,13 @@ public class Player extends Sprite {
     private final String path;
 
 
-    public Player(String path, int width, int height) {
+    public Player(String path, int width, int height, int x, int y) {
         this.path = path;
         this.width = width;
         this.height = height;
         loadImage();
         resetState();
-        setDirection(0, -1);
+        setDirection(x, y);
     }
 
     protected void loadImage() {
@@ -33,8 +33,8 @@ public class Player extends Sprite {
     }
 
     public void act() {
-        x += dx;
-        y += dy;
+        x += dx * direction[0];
+        y += dy * direction[1];
         constrainToBoardBounds();
     }
 
@@ -48,16 +48,16 @@ public class Player extends Sprite {
 
         if (key == KeyEvent.VK_LEFT) {
             dx = -PLAYER_SPEED;
-            setDirection(-1, 0);
+//            setDirection(-1, 0);
         } else if (key == KeyEvent.VK_RIGHT) {
             dx = PLAYER_SPEED;
-            setDirection(1, 0);
+//            setDirection(1, 0);
         } else if (key == KeyEvent.VK_UP) {
             dy = -PLAYER_SPEED;
-            setDirection(0, -1);
+//            setDirection(0, -1);
         } else if (key == KeyEvent.VK_DOWN) {
             dy = PLAYER_SPEED;
-            setDirection(0, 1);
+//            setDirection(0, 1);
         }
     }
 

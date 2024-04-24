@@ -1,14 +1,15 @@
 package bin.freezemonsters;
 
+import bin.spriteframework.AbstractBoard;
 import bin.spriteframework.sprite.Player;
+import bin.spriteframework.sprite.SpriteFactory;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class FreezeMonstersBoard extends bin.spriteframework.AbstractBoard{
-    @Override
-    protected void createBadSprites() {
-
+public class FreezeMonstersBoard extends AbstractBoard {
+    public FreezeMonstersBoard() {
+        super(new FreezeMonstersSpriteFactory());
     }
 
     @Override
@@ -17,7 +18,7 @@ public class FreezeMonstersBoard extends bin.spriteframework.AbstractBoard{
     }
 
     @Override
-    protected void drawOtherSprites(Graphics g) {
+    protected void drawOtherSprites(Graphics var1) {
 
     }
 
@@ -27,7 +28,7 @@ public class FreezeMonstersBoard extends bin.spriteframework.AbstractBoard{
     }
 
     @Override
-    protected void processOtherSprites(Player player, KeyEvent e) {
+    protected void processOtherSprites(Player var1, KeyEvent var2) {
 
     }
 }

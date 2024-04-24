@@ -1,10 +1,11 @@
-package bin.SpaceInvaders;
+package bin.spaceinvaders;
 
 import java.awt.EventQueue;
 
 import bin.spriteframework.sprite.SpriteFactory;
 import bin.spriteframework.AbstractBoard;
 import bin.spriteframework.MainFrame;
+import bin.SpaceInvaders.SpaceInvadersBoard;
 
 public class SpaceInvadersGame extends MainFrame {
 	public SpaceInvadersGame () {

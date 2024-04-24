@@ -6,10 +6,13 @@ import java.util.Iterator;
 import java.util.Random;
 import javax.swing.ImageIcon;
 
+import bin.spaceinvaders.sprite.Bomb;
+import bin.spaceinvaders.sprite.BomberSprite;
+import bin.spaceinvaders.sprite.Shot;
 import bin.spriteframework.AbstractBoard;
 import bin.spriteframework.sprite.*;
 
-import static bin.SpaceInvaders.CommonsSpaceInvaders.*;
+import static bin.spaceinvaders.CommonsSpaceInvaders.*;
 
 public class SpaceInvadersBoard extends AbstractBoard {
     private Shot shot;

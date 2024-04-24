@@ -1,12 +1,12 @@
-package bin.SpaceInvaders;
+package bin.spaceinvaders.sprite;
 
 import bin.ImageResizer;
-import bin.spriteframework.sprite.Bomb;
-import bin.spriteframework.sprite.BomberSprite;
+import bin.spaceinvaders.sprite.Bomb;
+import bin.spaceinvaders.sprite.BomberSprite;
 
 import javax.swing.*;
 
-import static bin.SpaceInvaders.CommonsSpaceInvaders.*;
+import static bin.spaceinvaders.CommonsSpaceInvaders.*;
 
 public class Alien extends BomberSprite {
     public Alien(int x, int y, int width, int height) {
