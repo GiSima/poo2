@@ -132,12 +132,7 @@ public class FreezeMonstersBoard extends AbstractBoard {
         for (BadSprite monster : badSprites) {
             if (monster.isVisible()) {
                 Direction d = ((Monster) monster).getDirection();
-                switch (d){
-                    case UP -> monster.moveY(-MONSTER_MOVEMENT);
-                    case DOWN -> monster.moveY(MONSTER_MOVEMENT);
-                    case LEFT -> monster.moveX(-MONSTER_MOVEMENT);
-                    case RIGHT -> monster.moveX(MONSTER_MOVEMENT);
-                }
+                monster.moveDirection(d, MONSTER_MOVEMENT);
                 checkMonsterBounds((Monster) monster);
             }
         }

@@ -7,7 +7,7 @@ public interface CommonsFreezeMonsters extends bin.spriteframework.Commons{
     int BOMB_WIDTH = BOMB_HEIGHT;
     int SHOT_HEIGHT = 20;
     int SHOT_WIDTH = SHOT_HEIGHT;
-    int SHOT_MOVEMENT = 4;
+    int SHOT_MOVEMENT = 10;
 //    Trevisan:
 //    String IMAGE_MONSTER ="SpaceInvaders/images/alien.png" ;
 //    String IMAGE_BOMB = "SpaceInvaders/images/bomb.png";
