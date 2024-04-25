@@ -177,7 +177,8 @@ public class FreezeMonstersBoard extends AbstractBoard {
 
     private void moveBomb(Goo goo) {//bomba chegue até a parte inferior da tela
         if (!goo.isDestroyed()) {
-            goo.setY(goo.getY() + 1);
+//            goo.setY(goo.getY() + 1);
+            goo.moveDirection(goo.getDirection(), 1);
 
             if (goo.getY() >= BOARD_HEIGHT - BOMB_HEIGHT) {
                 goo.setDestroyed(true);

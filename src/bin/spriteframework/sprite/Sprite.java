@@ -1,5 +1,7 @@
 package bin.spriteframework.sprite;
 
+import bin.spriteframework.Direction;
+
 import java.awt.Image;
 import java.awt.Rectangle;
 public class Sprite{
@@ -76,6 +78,15 @@ public class Sprite{
 
     public void moveY(int amount){
         this.y += amount * this.direction[1];
+    }
+
+    public void moveDirection(Direction d, int amount) {
+        switch (d){
+            case LEFT -> moveX(amount);
+            case RIGHT -> moveX(-amount);
+            case DOWN -> moveY(amount);
+            case UP -> moveY(-amount);
+        }
     }
 
 }
