@@ -12,8 +12,6 @@ public class Sprite{
     protected int width;
     protected int height;
     protected int[] direction; // 0 or 1 represents if it moves in each direction [x, y]
-    protected int dx;
-    protected int dy;
 
     public Sprite() {
         direction = new int[2];

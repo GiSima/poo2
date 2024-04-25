@@ -1,17 +1,20 @@
-package bin.spaceinvaders.sprite;
+package bin.freezemonsters.sprite;
 
 import bin.ImageResizer;
+import bin.spriteframework.Direction;
 import bin.spriteframework.sprite.BadSprite;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.util.LinkedList;
 
-public class Shot extends BadSprite {
-    public Shot() {
+public class Freeze extends BadSprite {
+    private Direction direction;
+    public Freeze() {
         setVisible(false);
     }
 
-    public Shot(String path, int x, int y, int width, int height) {
+    public Freeze(String path, int x, int y, int width, int height) {
+        setDirection(1,1);
         this.path = path;
         this.width = width;
         this.height = height;
@@ -27,6 +30,14 @@ public class Shot extends BadSprite {
 
         int V_SPACE = 1;
         setY(y - V_SPACE);
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Direction lastDirection) {
+        this.direction = lastDirection;
     }
 
     @Override

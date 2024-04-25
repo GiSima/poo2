@@ -4,14 +4,7 @@ import java.util.LinkedList;
 
 public abstract class BadSprite extends Sprite {
 
-    public BadSprite() {
-    }
-    public LinkedList<BadSprite> getBadnesses() {
-        return null;
-    }
+    public abstract LinkedList<BadSprite> getBadnesses();
 
-    public boolean isDestroyed() {
-        return false;
-    }
-
+    public abstract boolean isDestroyed();
 }

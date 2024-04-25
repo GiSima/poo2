@@ -1,4 +1,4 @@
-package bin.SpaceInvaders;
+package bin.spaceinvaders;
 
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -20,14 +20,14 @@ public class SpaceInvadersBoard extends AbstractBoard {
     private int deaths = 0;
 
     public SpaceInvadersBoard(SpriteFactory spriteFactory) {
-        super(spriteFactory);
+        super(spriteFactory, BOARD_WIDTH, BOARD_HEIGHT);
     }
 
     @Override
     protected void createBadSprites() {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 6; j++) {
-                BomberSprite alien = spriteFactory.createBadSprite(ALIEN_INIT_X + 18 * j, ALIEN_INIT_Y + 18 * i);
+                BomberSprite alien = (BomberSprite) spriteFactory.createBadSprite(ALIEN_INIT_X + 18 * j, ALIEN_INIT_Y + 18 * i);
                 badSprites.add(alien);
             }
         }
@@ -53,7 +53,7 @@ public class SpaceInvadersBoard extends AbstractBoard {
     protected void processOtherSprites(Player player, KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_SPACE && inGame) {
             if (shot == null || !shot.isVisible()) {
-                shot = spriteFactory.createRay(player.getX(), player.getY());
+                shot = (Shot) spriteFactory.createRay(player.getX(), player.getY());
             }
         }
     }
@@ -76,7 +76,10 @@ public class SpaceInvadersBoard extends AbstractBoard {
     }
 
     private void updatePlayer() {
-        players.forEach(Player::act);
+        for (Player p : players) {
+            p.act(getWidth(), getHeight());
+        }
+        ;
     }
 
     private void updateShots() {

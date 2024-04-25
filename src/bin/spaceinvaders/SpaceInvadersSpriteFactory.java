@@ -1,7 +1,6 @@
 package bin.spaceinvaders;
 
 import bin.spaceinvaders.sprite.Alien;
-import bin.spaceinvaders.sprite.BomberSprite;
 import bin.spaceinvaders.sprite.Shot;
 import bin.spriteframework.sprite.*;
 
@@ -14,7 +13,7 @@ public class SpaceInvadersSpriteFactory implements SpriteFactory {
     }
 
     @Override
-    public BomberSprite createBadSprite(int x, int y) {
+    public Alien createBadSprite(int x, int y) {
         Alien alien = new Alien(x, y, ALIEN_WIDTH, ALIEN_HEIGHT);
         alien.setDirection(1,0);
         return alien;

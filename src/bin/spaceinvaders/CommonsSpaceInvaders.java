@@ -2,7 +2,8 @@ package bin.spaceinvaders;
 
 
 public interface CommonsSpaceInvaders extends bin.spriteframework.Commons {
-
+    int BOARD_WIDTH = 358;
+    int BOARD_HEIGHT = 350;
     int BOMB_HEIGHT = 5;
     int BOMB_WIDTH = 1;
     int SHOT_HEIGHT = 5;

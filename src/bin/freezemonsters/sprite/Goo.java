@@ -1,4 +1,4 @@
-package bin.spaceinvaders.sprite;
+package bin.freezemonsters.sprite;
 
 import bin.ImageResizer;
 import bin.spriteframework.sprite.BadSprite;
@@ -6,10 +6,10 @@ import bin.spriteframework.sprite.BadSprite;
 import javax.swing.*;
 import java.util.LinkedList;
 
-public class Bomb extends BadSprite {
+public class Goo extends BadSprite {
     private boolean destroyed;
 
-    public Bomb(String path, int x, int y, int width, int height) {
+    public Goo(String path, int x, int y, int width, int height) {
         this.path = path;
         this.width = width;
         this.height = height;

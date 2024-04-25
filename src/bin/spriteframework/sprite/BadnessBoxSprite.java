@@ -9,4 +9,9 @@ public class BadnessBoxSprite extends BadSprite {
     public LinkedList<BadSprite> getBadnesses() {
         return this.badnesses;
     }
+
+    @Override
+    public boolean isDestroyed() {
+        return false;
+    }
 }
